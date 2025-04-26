@@ -8,14 +8,14 @@ const productsData = [
   {
     id: 1,
     name: 'Ethernet Cable 6',
-    description: 'Reliable Cat 6 Ethernet cable for high-speed network connections.', // Updated description
+    description: 'Reliable Cat 6 Ethernet cable for high-speed network connections.', 
     image: product1,
     price: '$15.99 / 50ft',
   },
   {
     id: 2,
     name: 'Coaxial Cable RG6',
-    description: 'High-performance RG6 coaxial cable for CATV, satellite, and broadband internet.', // Updated description
+    description: 'High-performance RG6 coaxial cable for CATV, satellite, and broadband internet.', 
     image: product2,
     price: '$12.49 / 50ft',
   },
