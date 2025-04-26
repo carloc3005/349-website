@@ -17,7 +17,7 @@ function App() {
         // The path is the URL and the element is the component to be rendered
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/service" element={<Service />} />
+        <Route path="/services" element={<Service />} />
         <Route path="/products" element={<Products />} /> 
         <Route path="/order" element={<Order />} /> 
       </Routes>
