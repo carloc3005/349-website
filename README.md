@@ -4,9 +4,9 @@ This project will create a web application using react
 -- after cloning the project run the command install node.js
 -- manually install from the URL https://nodejs.org/en 
 -- Make sure the environment has npm installed using npm -v
---if not install run the command npm i or npm install
---using Tail wind:
--- instal with the command: "npm install tailwindcss postcss autoprefixer"
+-- if not install run the command npm i or npm install
+-- using Tail wind:
+-- install with the command: "npm install tailwindcss postcss autoprefixer"
 -- open directory src with the command cd src
 -- run the server with the command npm run dev
 
