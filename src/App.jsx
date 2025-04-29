@@ -1,30 +1,34 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './frontend/pages/home.jsx' 
-import About from './frontend/pages/about.jsx'
-import Service from './frontend/pages/services.jsx'
-import Products from './frontend/pages/products.jsx'; 
-import Order from './frontend/pages/order.jsx'; 
-import Navbar from './frontend/pages/navbar.jsx';
-import Footer from './frontend/pages/footer.jsx';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './frontend/pages/navbar';
+import Home from './frontend/pages/home';
+import Products from './frontend/pages/products';
+import About from './frontend/pages/about';
+import Order from './frontend/pages/order';
+import Footer from './frontend/pages/footer';
+import { QuoteProvider } from './frontend/context/QuoteContext'; // Import the provider
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />   
-      <Routes>
-        // All the routes or pages
-        // The path is the URL and the element is the component to be rendered
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Service />} />
-        <Route path="/products" element={<Products />} /> 
-        <Route path="/order" element={<Order />} /> 
-      </Routes>
-      <Footer /> 
-    </BrowserRouter>
-  )
+    <QuoteProvider> {/* Wrap the Router with QuoteProvider */}
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/order" element={<Order />} />
+              {/* Add other routes as needed */}
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </QuoteProvider>
+  );
 }
 
-export default App
+export default App;
 
