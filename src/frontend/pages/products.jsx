@@ -93,7 +93,7 @@ const Products = () => {
 
   // Render the component UI
   return (
-    <div> 
+    <div className='animate-fadeIn'> 
       {/* Banner Section */}
       <div
         className="bg-cover bg-left text-white py-32 px-4 text-center mb-12 relative" 
@@ -108,7 +108,7 @@ const Products = () => {
       </div>
 
       {/* Products Grid Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 animate-slideUp">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-16">Our Products</h2> 
         {/* Grid layout for product cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
