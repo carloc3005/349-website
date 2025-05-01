@@ -39,6 +39,17 @@ const QuoteReview = () => {
 
   // Function to handle proceeding to order confirmation
   const handleProceed = () => {
+    console.log("handleProceed called"); // Log when function starts
+
+    // --- Basic Validation ---
+    if (!firstName || !lastName || !phone || !email || !street || !city || !state || !zip) {
+      console.error("Validation failed: Missing required fields.");
+      // Optionally, set an error state here to display a message to the user
+      alert("Please fill in all required fields before proceeding."); // Simple alert for now
+      return; // Stop execution if validation fails
+    }
+    // --- End Validation ---
+
     // Gather user info and quote items into an order object
     const orderDetails = {
       user: {
@@ -58,10 +69,30 @@ const QuoteReview = () => {
       totalPrice: totalQuotePrice,
       totalFeet: calculateTotalFeet(),
     };
-    // Store the order details temporarily in sessionStorage
-    sessionStorage.setItem('currentOrderDetails', JSON.stringify(orderDetails));
-    // Navigate to the order confirmation page
-    navigate('/order-confirmation');
+    console.log("Order details to save:", orderDetails); // Log the data being saved
+
+    try {
+      // Store the order details temporarily in sessionStorage
+      sessionStorage.setItem('currentOrderDetails', JSON.stringify(orderDetails));
+      
+      // *** Add immediate verification log ***
+      const itemJustSet = sessionStorage.getItem('currentOrderDetails');
+      console.log("Immediately after setItem, sessionStorage contains:", itemJustSet ? 'Item found' : 'Item NOT found!');
+      
+      // Check if item was actually set before navigating
+      if (itemJustSet) {
+        // Navigate to the order confirmation page
+        navigate('/order-confirmation');
+        console.log("Navigating to /order-confirmation"); // Log navigation attempt
+      } else {
+        console.error("CRITICAL: sessionStorage.setItem seemed to fail silently!");
+        alert("Failed to store order details before navigating. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error setting sessionStorage or navigating:", error); // Log any errors
+      // Optionally, display an error message to the user here
+      alert("An error occurred while trying to proceed. Please check the console."); // Simple alert for errors
+    }
   };
 
   // Render the component UI

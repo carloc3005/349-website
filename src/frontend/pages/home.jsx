@@ -139,7 +139,7 @@ function Home() {
             <h2 className="text-4xl font-bold text-blue-700 mb-12">Our Clients</h2>
 
             <div className="relative overflow-hidden flex w-[200%] animate-scroll gap-10">
-              {[...Array(2)].flatMap(() =>
+              {[...Array(2)].flatMap((_, dupIndex) => // Get duplication index (0 or 1)
                 [
                   product1,
                   product2,
@@ -151,14 +151,16 @@ function Home() {
                   product8,
                   product9,
                   product10,
-                ].map((logo, index) => (
+                ].map((logo, itemIndex) => ( // Get item index (0-9)
                   <div
-                    key={index}
+                    // Combine dupIndex and itemIndex for a unique key
+                    key={`${dupIndex}-${itemIndex}`}
                     className="min-w-64 bg-white shadow-md rounded-full"
                   >
                     <img
                       src={logo}
-                      alt={`Client ${index + 1}`}
+                      // Update alt text slightly for clarity, though not strictly necessary for the fix
+                      alt={`Client logo ${dupIndex * 10 + itemIndex + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </div>

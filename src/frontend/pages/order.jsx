@@ -22,12 +22,12 @@ const Order = () => {
       return;
     }
 
-    // Create the key used to store the order in localStorage
+    // Create the key used to store the order in sessionStorage
     const storageKey = `order_${inputOrderNumber}`;
 
     try {
-      // Try to get the order data from localStorage
-      const storedOrderString = localStorage.getItem(storageKey);
+      // Try to get the order data from sessionStorage
+      const storedOrderString = sessionStorage.getItem(storageKey);
 
       // If order data exists
       if (storedOrderString) {
@@ -46,8 +46,8 @@ const Order = () => {
         setError('Order number not found or invalid.');
       }
     } catch (e) {
-      // Handle errors during localStorage access or parsing
-      console.error("Error reading or parsing order from localStorage:", e);
+      // Handle errors during sessionStorage access or parsing
+      console.error("Error reading or parsing order from sessionStorage:", e);
       setError('Error retrieving order details. Please try again.');
       setOrderDetails(null); // Clear details on error
     }

@@ -74,6 +74,11 @@ export const QuoteProvider = ({ children }) => {
     );
   };
 
+  // Function to clear all items from the quote
+  const clearQuote = () => {
+    setQuoteItems([]); // Set items to an empty array
+  };
+
   // Calculate the total price of all items in the quote
   // Use reduce to sum up the totalItemPrice of each item
   const totalQuotePrice = quoteItems.reduce((total, item) => total + (item.totalItemPrice || 0), 0);
@@ -87,6 +92,7 @@ export const QuoteProvider = ({ children }) => {
     removeFromQuote, // Function to remove items
     updateQuantity,  // Function to update quantity
     totalQuotePrice, // The calculated total price of the quote
+    clearQuote,      // Function to clear the quote
   };
 
   // Return the Provider component, passing the value to all children
