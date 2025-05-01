@@ -24,12 +24,22 @@ module.exports = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        slideFromLeft: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        slideFromRight: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
       },
       animation: {
         flyAcrossAndDisappear: 'flyAcrossAndDisappear 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
         fadeIn: 'fadeIn 1.5s ease-out forwards',
         slideUp: 'slideUp 1s ease-out forwards',
         scroll: 'scrollLeft 20s linear infinite',
+        slideFromLeft: 'slideFromLeft 0.5s ease-in-out forwards',
+        slideFromRight: 'slideFromRight 0.5s ease-in-out forwards',
       },
     },
   },
