@@ -13,6 +13,7 @@ This project will create a web application using react
 --'install node.js'
 --'npm install'
 --'npm install tailwindcss postcss autoprefixer'
+--'npm install lottie-react'
 
 -- run the server with the command:
 --'npm run dev'

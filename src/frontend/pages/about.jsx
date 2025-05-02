@@ -3,7 +3,7 @@ import banner1 from '../../assets/banner1.png';
 
 const About = () => {
   return (
-    <div>
+    <div className="animate-fadeIn">
       {/* Banner Section */}
       <div
         className="h-64 bg-cover bg-center mb-12 relative"

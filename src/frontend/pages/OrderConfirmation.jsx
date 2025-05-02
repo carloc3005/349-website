@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import banner1 from '../../assets/banner1.png'; 
 import { useQuote } from '../context/QuoteContext'; 
+import Lottie from 'lottie-react';
+import animationData from '../../assets/blue-envelopeAni.json'; 
 
 // OrderConfirmation component definition
 const OrderConfirmation = () => {
@@ -16,7 +18,10 @@ const OrderConfirmation = () => {
   const navigate = useNavigate(); // Initialize useNavigate
   const hasProcessedOrder = useRef(false); // Ref to track if order is processed
 
-  
+  // State for animation
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+
   useEffect(() => {
     // --- Check if order has already been processed ---
     if (hasProcessedOrder.current) {
@@ -85,6 +90,10 @@ const OrderConfirmation = () => {
       // --- Mark order as processed ---
       hasProcessedOrder.current = true; // Set ref to true after successful processing
 
+      // Delay to play animation before showing confirmation
+      setTimeout(() => {
+        setShowConfirmation(true);
+      }, 4000);
     } catch (error) {
       // Log error if saving the final order fails
       console.error("Failed to save complete order to sessionStorage:", error);
@@ -107,80 +116,73 @@ const OrderConfirmation = () => {
       </div>
 
       {/* Confirmation Message Section */}
+      {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex items-center justify-center bg-gray-50" style={{ minHeight: 'calc(100vh - 16rem)' }}>
-        {/* White card container for the message */}
-        <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 text-center max-w-lg">
-          {/* Conditional Rendering based on error state */}
-          {error ? (
-            <>
-              {/* Error Icon */}
-              <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-16 w-16 text-red-500 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">Order Error</h1>
-              <p className="text-lg text-red-600 mb-8">{error}</p>
-              <Link
-                to="/quote-review"
-                className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-md shadow-md hover:shadow-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-              >
-                Review Quote
-              </Link>
-            </>
-          ) : (
-            <>
-              {/* Success icon */}
-              <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-16 w-16 text-green-500 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {/* Main confirmation heading */}
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">Thank You for Your Order!</h1>
-              {/* Confirmation subtext */}
-              <p className="text-lg text-gray-600 mb-6">
-                Your order has been placed successfully.
-              </p>
-              
-              {/* Display User Information if available */}
-              {userInfo && (
-                <div className="text-left bg-gray-100 p-4 rounded-md mb-6 border border-gray-200">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-2">Order Details:</h2>
-                  <p className="text-sm text-gray-700"><strong>Name:</strong> {userInfo.firstName} {userInfo.lastName}</p>
-                  <p className="text-sm text-gray-700"><strong>Email:</strong> {userInfo.email}</p>
-                  <p className="text-sm text-gray-700"><strong>Phone:</strong> {userInfo.phone}</p>
-                  {/* Display address if provided */}
-                  {userInfo.address && (
-                    <p className="text-sm text-gray-700"><strong>Address:</strong> {userInfo.address.street}, {userInfo.address.city}, {userInfo.address.state} {userInfo.address.zip}</p>
-                  )}
-                  {/* Display notes if provided */}
-                  {userInfo.notes && (
-                    <p className="text-sm text-gray-700 mt-2"><strong>Notes:</strong> {userInfo.notes}</p>
-                  )}
-                </div>
-              )}
-              {/* End Display User Info */}
+        {!showConfirmation ? (
+          // ✨ Animation Section
+          <div className="w-[300px]">
+            <Lottie animationData={animationData} loop={false} />
+          </div>
+        ) : (
+          // ✅ Confirmation Section
+          <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 text-center max-w-lg transition-opacity duration-700 ease-in-out opacity-100">
+            {error ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-16 w-16 text-red-500 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">Order Error</h1>
+                <p className="text-lg text-red-600 mb-8">{error}</p>
+                <Link
+                  to="/quote-review"
+                  className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-md shadow-md hover:shadow-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                >
+                  Review Quote
+                </Link>
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-16 w-16 text-green-500 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">Thank You for Your Order!</h1>
+                <p className="text-lg text-gray-600 mb-6">Your order has been placed successfully.</p>
 
-              {/* Disclaimer about session storage */}
-              <p className="text-sm text-gray-500 mb-6">(Order details saved locally for this session for demonstration)</p>
-              
-              {/* Display the order number */}
-              {orderNumber ? (
-                <p className="text-xl font-semibold text-gray-800 mb-8">
-                  Your Order Number is: <span className="text-cyan-700">{orderNumber}</span>
-                </p>
-              ) : (
-                // Show loading message while order number is generated
-                <p className="text-lg text-gray-600 mb-8">Generating order number...</p>
-              )}
-              
-              {/* Link to return to the homepage */}
-              <Link
-                to="/"
-                className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-md shadow-md hover:shadow-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-              >
-                Return to Homepage
-              </Link>
-            </>
-          )}
-        </div>
+                {userInfo && (
+                  <div className="text-left bg-gray-100 p-4 rounded-md mb-6 border border-gray-200">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-2">Order Details:</h2>
+                    <p className="text-sm text-gray-700"><strong>Name:</strong> {userInfo.firstName} {userInfo.lastName}</p>
+                    <p className="text-sm text-gray-700"><strong>Email:</strong> {userInfo.email}</p>
+                    <p className="text-sm text-gray-700"><strong>Phone:</strong> {userInfo.phone}</p>
+                    {userInfo.address && (
+                      <p className="text-sm text-gray-700"><strong>Address:</strong> {userInfo.address.street}, {userInfo.address.city}, {userInfo.address.state} {userInfo.address.zip}</p>
+                    )}
+                    {userInfo.notes && (
+                      <p className="text-sm text-gray-700 mt-2"><strong>Notes:</strong> {userInfo.notes}</p>
+                    )}
+                  </div>
+                )}
+
+                <p className="text-sm text-gray-500 mb-6">(Order details saved locally for this session for demonstration)</p>
+
+                {orderNumber ? (
+                  <p className="text-xl font-semibold text-gray-800 mb-8">
+                    Your Order Number is: <span className="text-cyan-700">{orderNumber}</span>
+                  </p>
+                ) : (
+                  <p className="text-lg text-gray-600 mb-8">Generating order number...</p>
+                )}
+
+                <Link
+                  to="/"
+                  className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-md shadow-md hover:shadow-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                >
+                  Return to Homepage
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
