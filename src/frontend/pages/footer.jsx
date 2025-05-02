@@ -28,7 +28,7 @@ const Footer = () => {
         {/* Contact Info */}
         <div>
           <h4 className="uppercase text-xs mb-2 text-gray-500">Contacts</h4>
-          <p>support@wireedge.com</p>
+          <p>support@wirededge.com</p>
           <p>+1-999-123-0000</p>
         </div>
 

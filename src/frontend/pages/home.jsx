@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import homepageImage from '../../assets/homepage.png';
 import rightArrow from '../../assets/right-arrow.png';
 import leftArrow from '../../assets/left-arrow.png';
@@ -7,6 +7,8 @@ import catImage2 from '../../assets/Cat-2.png';
 import catImage3 from '../../assets/Cat-3.png';
 import catVideo from '../../assets/cat-chilling.mp4';
 import { useNavigate } from 'react-router-dom';
+import Lottie from 'lottie-react';
+import animationData from '../../assets/cord-connect.json';
 
 import product1 from '../../assets/product1.png';
 import product2 from '../../assets/product2.png';
@@ -25,7 +27,7 @@ const slides = [
     media: homepageImage,
     content: (
       <div className="relative z-10 text-center p-4 animate-slideUp">
-        <h1 className="text-5xl font-bold mb-4">Welcome to WireEdge</h1>
+        <h1 className="text-5xl font-bold mb-4">Welcome to WiredEdge</h1>
         <p className="text-lg mb-8">We do stuff.</p>
       </div>
     ),
@@ -47,12 +49,16 @@ function Home() {
   const [direction, setDirection] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const [backgroundColor, setBackgroundColor] = useState('#000000');
+  const lottieRef = useRef();
+  const bgRef = useRef(null);
 
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHome(true);
-      setDirection(null); // prevent slide on first load
-    }, 2500);
+      setDirection(null); 
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -76,17 +82,34 @@ function Home() {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-black text-white overflow-x-hidden relative">
       {!showHome && (
-        <div className="flex flex-col items-start justify-center space-y-4 w-full h-screen">
-          <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear"></div>
-          <div
-            className="bg-white h-1 w-full animate-flyAcrossAndDisappear"
-            style={{ animationDelay: '0.2s' }}
-          ></div>
-          <div
-            className="bg-white h-1 w-full animate-flyAcrossAndDisappear"
-            style={{ animationDelay: '0.4s' }}
-          ></div>
+        <div
+          ref={bgRef}
+          className="flex items-center justify-center w-full h-screen transition-colors duration-300"
+          style={{ backgroundColor }}>
+          <Lottie
+              lottieRef={lottieRef}
+              animationData={animationData}
+              loop={false}
+              className="w-full h-full max-w-[600px] max-h-[600px] rounded-full"
+              onEnterFrame={(e) => {
+                const frame = Math.floor(e.currentTime);
+              
+                // Freeze animation at frame 60
+                if (frame >= 60) {
+                  lottieRef.current.goToAndStop(60, true); // stops at frame 60
+                  return;
+                }
+              
+                // Dynamic background color sync
+                if (frame <= 15) {
+                  bgRef.current.style.backgroundColor = '#000000';;
+                } else if (frame >= 24) {
+                  bgRef.current.style.backgroundColor = '#4283b7';;
+                }
+              }}
+            />
         </div>
+
       )}
 
       {showHome && (
@@ -129,7 +152,7 @@ function Home() {
           </div>
 
           <div className="w-full bg-blue-700 text-white text-center py-6 -mt-12 z-20 relative">
-            <p className="text-2xl font-semibold tracking-wider">Create stuff with WireEdge........</p>
+            <p className="text-2xl font-semibold tracking-wider">Create stuff with WiredEdge........</p>
           </div>
 
           <div className="w-full bg-white text-black px-4 sm:px-16 md:px-32 py-12 sm:py-16 text-center">
