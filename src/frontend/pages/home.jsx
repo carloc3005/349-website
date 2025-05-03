@@ -21,6 +21,12 @@ import product7 from '../../assets/product7.png';
 import product8 from '../../assets/product8.png';
 import product9 from '../../assets/product9.png';
 import product10 from '../../assets/product10.png';
+import cust1 from '../../assets/iteris.png';
+import cust2 from '../../assets/flodraulic.png';
+import cust3 from '../../assets/Alvarado.jpg';
+import cust4 from '../../assets/amp_research.jpeg';
+import cust5 from '../../assets/applied.png';
+import cust6 from '../../assets/bendix.png';
 
 const slides = [
   {
@@ -161,26 +167,33 @@ function Home() {
 
           <div className="w-full bg-gray-100 px-16 py-16 text-center overflow-hidden">
             <h2 className="text-4xl font-bold text-blue-700 mb-12">Our Clients</h2>
+
             <div className="relative overflow-hidden flex w-[200%] animate-scroll gap-10">
               {[...Array(2)].flatMap((_, dupIndex) =>
-                [
-                  product1,
-                  product2,
-                  product3,
-                  product4,
-                  product5,
-                  product6,
-                  product7,
-                  product8,
-                  product9,
-                  product10,
-                ].map((logo, index) => (
-                  <div key={`${dupIndex}-${index}`} className="min-w-48 bg-white shadow-md rounded-full">
-                    <img src={logo} alt={`Client ${index + 1}`} className="w-full h-full object-cover" />
-                  </div>
-                ))
-              )}
-            </div>
+              [
+                { logo: cust1, link: "https://iteris.com" },
+                { logo: cust2, link: "https://flodraulic.com" },
+                { logo: cust3, link: "https://alvaradomfg.com/" },
+                { logo: cust4, link: "https://realtruck.com/" },
+                { logo: cust5, link: "https://www.appliedmedical.com/" },
+                { logo: cust6, link: "https://bendix.co" }
+              ].map((client, index) => (
+                <a
+                key={`${dupIndex}-${index}`}
+                href={client.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-w-76 bg-white shadow-md rounded-bl-full hover:opacity-80 transition-opacity"
+                >
+                  <img
+                  src={client.logo}
+                  alt={`Client ${index + 1}`}
+                className="w-full h-full object-cover"
+                  />
+                </a>
+              ))
+            )}
+          </div>
           </div>
 
           <div className="w-full bg-blue-700 text-white text-center py-6 -mt-12 z-20 relative"></div>
