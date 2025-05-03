@@ -5,6 +5,9 @@ import leftArrow from '../../assets/left-arrow.png';
 import catImage1 from '../../assets/Cat-1.png';
 import catImage2 from '../../assets/Cat-2.png';
 import catImage3 from '../../assets/Cat-3.png';
+import designImage from '../../assets/design.png';
+import customImage from '../../assets/Custom_Harness.png';
+import testImage from '../../assets/test.png';
 import catVideo from '../../assets/cat-chilling.mp4';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
@@ -155,17 +158,17 @@ function Home() {
             <p className="text-2xl font-semibold tracking-wider">Create stuff with WiredEdge........</p>
           </div>
 
-          <div className="w-full bg-white text-black px-4 sm:px-16 md:px-32 py-12 sm:py-16 text-center">
+          <div className="w-full bg-blue-300 text-black px-4 sm:px-16 md:px-32 py-12 sm:py-16 text-center">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-semibold mb-10 sm:mb-12">-What We Do-</h2>
               <div className="flex flex-col md:flex-row justify-center items-center space-y-12 md:space-y-0 md:space-x-32 gap-16">
-                {[catImage1, catImage2, catImage3].map((img, i) => (
+                {[designImage, customImage, testImage].map((img, i) => (
                   <div className="flex flex-col items-center" key={i}>
                     <div className="w-32 h-32 sm:w-48 sm:h-48 md:w-72 md:h-72 rounded-full overflow-hidden mb-4">
                       <img src={img} alt={`Step ${i + 1}`} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-base sm:text-2xl font-semibold mb-1">
-                      {['Design', 'Fabricate', 'Test'][i]}
+                      {['Design', 'Build', 'Test'][i]}
                     </h3>
                     <p className="text-sm sm:text-base text-gray-500">
                       {['We design the cable.', 'We build and assemble the cable.', 'We test the cable.'][i]}
