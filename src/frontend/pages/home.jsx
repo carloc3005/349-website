@@ -35,7 +35,7 @@ const slides = [
     content: (
       <div className="relative z-10 text-center p-4 animate-slideUp">
         <h1 className="text-5xl font-bold mb-4">Welcome to WiredEdge</h1>
-        <p className="text-lg mb-8">We do stuff.</p>
+        <p className="text-lg mb-8">Connecting to the Future.</p>
       </div>
     ),
   },
