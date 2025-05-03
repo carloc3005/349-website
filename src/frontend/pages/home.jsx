@@ -2,25 +2,12 @@ import React, { useEffect, useState } from 'react';
 import homepageImage from '../../assets/homepage.png';
 import rightArrow from '../../assets/right-arrow.png';
 import leftArrow from '../../assets/left-arrow.png';
-import catImage1 from '../../assets/Cat-1.png';
-import catImage2 from '../../assets/Cat-2.png';
-import catImage3 from '../../assets/Cat-3.png';
 import designImage from '../../assets/design.png';
 import customImage from '../../assets/Custom_Harness.png';
 import testImage from '../../assets/test.png';
-import catVideo from '../../assets/cat-chilling.mp4';
+import cableVideo from '../../assets/cable-assembly.mp4';
 import { useNavigate } from 'react-router-dom';
 
-import product1 from '../../assets/product1.png';
-import product2 from '../../assets/product2.png';
-import product3 from '../../assets/product3.png';
-import product4 from '../../assets/product4.png';
-import product5 from '../../assets/product5.png';
-import product6 from '../../assets/product6.png';
-import product7 from '../../assets/product7.png';
-import product8 from '../../assets/product8.png';
-import product9 from '../../assets/product9.png';
-import product10 from '../../assets/product10.png';
 import cust1 from '../../assets/iteris.png';
 import cust2 from '../../assets/flodraulic.png';
 import cust3 from '../../assets/Alvarado.jpg';
@@ -41,7 +28,7 @@ const slides = [
   },
   {
     type: 'video',
-    media: catVideo,
+    media: cableVideo,
     content: (
       <div className="relative z-10 text-right p-4 animate-slideUp">
         <h1 className="text-5xl font-bold mb-4">Watch Us Work</h1>
@@ -49,6 +36,15 @@ const slides = [
       </div>
     ),
   },
+];
+
+const clients = [
+  { logo: cust1, link: "https://iteris.com" },
+  { logo: cust2, link: "https://flodraulic.com" },
+  { logo: cust3, link: "https://alvaradomfg.com/" },
+  { logo: cust4, link: "https://realtruck.com/" },
+  { logo: cust5, link: "https://www.appliedmedical.com/" },
+  { logo: cust6, link: "https://bendix.co" },
 ];
 
 function Home() {
@@ -86,10 +82,10 @@ function Home() {
     <div className="flex flex-col items-center justify-start min-h-screen bg-black text-white overflow-x-hidden relative">
       {!showHome && (
         <div className="flex flex-col items-start justify-center space-y-4 w-full h-screen bg-black">
-        <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear"></div>
-        <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear" style={{ animationDelay: '0.2s' }}></div>
-        <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear" style={{ animationDelay: '0.4s' }}></div>
-      </div>
+          <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear"></div>
+          <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear" style={{ animationDelay: '0.2s' }}></div>
+          <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear" style={{ animationDelay: '0.4s' }}></div>
+        </div>
       )}
 
       {showHome && (
@@ -165,36 +161,30 @@ function Home() {
             </div>
           </div>
 
-          <div className="w-full bg-gray-100 px-16 py-16 text-center overflow-hidden">
+          {/* Clients Section */}
+          <div className="w-full bg-gray-100 px-4 py-16 text-center overflow-hidden">
             <h2 className="text-4xl font-bold text-blue-700 mb-12">Our Clients</h2>
+            <div className="relative overflow-hidden w-full">
+              <div className="flex animate-scroll gap-16 w-max">
+                {[...clients, ...clients].map((client, i) => (
+                  <a
+                    key={i}
+                    href={client.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-w-[200px] h-24 flex items-center justify-center"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={`Client ${i + 1}`}
+                      className="h-full object-contain"
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
 
-            <div className="relative overflow-hidden flex w-[200%] animate-scroll gap-10">
-              {[...Array(2)].flatMap((_, dupIndex) =>
-              [
-                { logo: cust1, link: "https://iteris.com" },
-                { logo: cust2, link: "https://flodraulic.com" },
-                { logo: cust3, link: "https://alvaradomfg.com/" },
-                { logo: cust4, link: "https://realtruck.com/" },
-                { logo: cust5, link: "https://www.appliedmedical.com/" },
-                { logo: cust6, link: "https://bendix.co" }
-              ].map((client, index) => (
-                <a
-                key={`${dupIndex}-${index}`}
-                href={client.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-76 bg-white shadow-md rounded-bl-full hover:opacity-80 transition-opacity"
-                >
-                  <img
-                  src={client.logo}
-                  alt={`Client ${index + 1}`}
-                className="w-full h-full object-cover"
-                  />
-                </a>
-              ))
-            )}
-          </div>
-          </div>
 
           <div className="w-full bg-blue-700 text-white text-center py-6 -mt-12 z-20 relative"></div>
         </>
