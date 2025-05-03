@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import homepageImage from '../../assets/homepage.png';
 import rightArrow from '../../assets/right-arrow.png';
 import leftArrow from '../../assets/left-arrow.png';
@@ -10,8 +10,6 @@ import customImage from '../../assets/Custom_Harness.png';
 import testImage from '../../assets/test.png';
 import catVideo from '../../assets/cat-chilling.mp4';
 import { useNavigate } from 'react-router-dom';
-import Lottie from 'lottie-react';
-import animationData from '../../assets/cord-connect.json';
 
 import product1 from '../../assets/product1.png';
 import product2 from '../../assets/product2.png';
@@ -52,16 +50,12 @@ function Home() {
   const [direction, setDirection] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
-  const [backgroundColor, setBackgroundColor] = useState('#000000');
-  const lottieRef = useRef();
-  const bgRef = useRef(null);
 
-  
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHome(true);
-      setDirection(null); 
-    }, 2000);
+      setDirection(null);
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -85,34 +79,11 @@ function Home() {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-black text-white overflow-x-hidden relative">
       {!showHome && (
-        <div
-          ref={bgRef}
-          className="flex items-center justify-center w-full h-screen transition-colors duration-300"
-          style={{ backgroundColor }}>
-          <Lottie
-              lottieRef={lottieRef}
-              animationData={animationData}
-              loop={false}
-              className="w-full h-full max-w-[600px] max-h-[600px] rounded-full"
-              onEnterFrame={(e) => {
-                const frame = Math.floor(e.currentTime);
-              
-                // Freeze animation at frame 60
-                if (frame >= 60) {
-                  lottieRef.current.goToAndStop(60, true); // stops at frame 60
-                  return;
-                }
-              
-                // Dynamic background color sync
-                if (frame <= 15) {
-                  bgRef.current.style.backgroundColor = '#000000';;
-                } else if (frame >= 24) {
-                  bgRef.current.style.backgroundColor = '#4283b7';;
-                }
-              }}
-            />
-        </div>
-
+        <div className="flex flex-col items-start justify-center space-y-4 w-full h-screen bg-black">
+        <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear"></div>
+        <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear" style={{ animationDelay: '0.2s' }}></div>
+        <div className="bg-white h-1 w-full animate-flyAcrossAndDisappear" style={{ animationDelay: '0.4s' }}></div>
+      </div>
       )}
 
       {showHome && (
@@ -191,7 +162,7 @@ function Home() {
           <div className="w-full bg-gray-100 px-16 py-16 text-center overflow-hidden">
             <h2 className="text-4xl font-bold text-blue-700 mb-12">Our Clients</h2>
             <div className="relative overflow-hidden flex w-[200%] animate-scroll gap-10">
-              {[...Array(2)].flatMap((_, dupIndex) => // Get duplication index (0 or 1)
+              {[...Array(2)].flatMap((_, dupIndex) =>
                 [
                   product1,
                   product2,
@@ -204,7 +175,7 @@ function Home() {
                   product9,
                   product10,
                 ].map((logo, index) => (
-                  <div key={index} className="min-w-48 bg-white shadow-md rounded-full">
+                  <div key={`${dupIndex}-${index}`} className="min-w-48 bg-white shadow-md rounded-full">
                     <img src={logo} alt={`Client ${index + 1}`} className="w-full h-full object-cover" />
                   </div>
                 ))
