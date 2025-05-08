@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import cust1 from '../../assets/iteris.png';
 import cust2 from '../../assets/flodraulic.png';
 import cust3 from '../../assets/Alvarado.jpg';
-import cust4 from '../../assets/amp_research.jpeg';
+import cust4 from '../../assets/amp_Research.jpeg'; // Corrected path
 import cust5 from '../../assets/applied.png';
 import cust6 from '../../assets/bendix.png';
 
