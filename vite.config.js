@@ -8,4 +8,5 @@ export default {
     extend: {},
   },
   plugins: [],
+  base: process.env.VITE_BASE_PATH || "/349-website"
 };
